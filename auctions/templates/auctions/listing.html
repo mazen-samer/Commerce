@@ -1,0 +1,59 @@
+{% extends "auctions/layout.html" %} {% block body %}
+<h2>Listing: {{listing.title}}</h2>
+<img width="400" src="{{listing.image}}" alt="">
+<h4 style="margin-top: 10px;">{{listing.description}}</h4>
+<h3>{{listing.price}}$</h3>
+<h5>Details:</h5>
+<ul>
+    <li>Listed by : <b>{{listing.owner}}</b></li>
+    <li>Category: <b>{{listing.category}}</b></li>
+</ul>
+<hr>
+<h6>Bids so far:</h6>
+{%if bids%}
+{%for bid in bids%}
+<p>{{bid.user}} made a bid of <strong>{{bid.bidAmount}}</strong>$</p>
+{%endfor%}
+{%else%}
+<p>The bids will appear here</p>
+{% endif %}
+<form style="margin-bottom: 10px; " action="{% url 'bid' listing.id %}" method="post">
+    {%csrf_token%}
+    <input type="number" name="bid" placeholder="Enter your bidding here">
+    {% if user.is_authenticated %}
+    <input style="width: fit-content;" type="submit" value="Place Bid">
+    {%else%}
+    <p>You need to be signed in.</p>
+    {%endif%}
+    <p>{{errorBid}}</p>
+</form>
+<hr>
+<h3>Comments:</h3>
+<div class="comments">
+    {% if comments %}
+    <ul>
+    {% for comment in comments %}
+    <li>
+        <h6>{{comment.user}}</h6>
+        <p>{{comment.commentContent}}</p>
+    </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>The comments will be displayed here.</p>
+    {% endif %}
+</div>
+<hr>
+<h4>Add a comment:</h4>
+    <form action="{% url 'comment' listing.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="comment" id="" placeholder="Enter your comment">
+        {% if user.is_authenticated %}
+        <input style="width: fit-content;" type="submit" value="Add your comment">
+        {%else%}
+        <p>You need to be signed in.</p>
+        {%endif%}
+        <p>{{errorComment}}</p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+body {
+  padding: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 500px;
+}
+
+.auction-list {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 200px;
+  height: 420px;
+  border: solid 1px black;
+}
+
+.card img {
+  max-width: 198px;
+}
+
+.inner-text {
+  padding: 10px;
+}
+
+.category-selection {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 500px;
+  margin: 25px;
+}
+
+.footer-break {
+  background-color: black;
+  height: 5px;
+}
+
+footer {
+  position: relative;
+  color: black;
+  padding: 20px 0px 20px 10px;
+  margin-top: 20px;
+}
